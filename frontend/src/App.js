@@ -17,16 +17,8 @@ function App() {
     return kelvin - 273.15;
   }
 
-  const degreeToText = (degree) => {
-    if (degree > 337.5) return 'N';
-    if (degree > 292.5) return 'NW';
-    if (degree > 247.5) return 'W';
-    if (degree > 202.5) return 'SW';
-    if (degree > 157.5) return 'S';
-    if (degree > 122.5) return 'SE';
-    if (degree > 67.5) return 'E';
-    if (degree > 22.5) { return 'NE'; }
-    return 'N';
+  const degreeToRotation = (degree) => {
+    return degree;
   }
 
   const fetchWeather = () => {
@@ -82,7 +74,10 @@ function App() {
               Wind Speed: {weather.wind.speed} m/s
             </Typography>
             <Typography variant="body1">
-              Wind Direction: {degreeToText(weather.wind.deg)}
+              Wind Direction:
+              <span className="wind-arrow" style={{ transform: `rotate(${degreeToRotation(weather.wind.deg)}deg)` }}>
+                →
+              </span>
             </Typography>
             <Typography variant="body1">
               Conditions: {weather.weather[0].description}
