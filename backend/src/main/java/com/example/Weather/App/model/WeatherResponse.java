@@ -109,6 +109,17 @@ public class WeatherResponse {
         public void setSpeed(int speed) {
             this.speed = speed;
         }
+
+        @JsonProperty("deg")
+        private int deg;
+
+        public int getDeg() {
+            return deg;
+        }
+
+        public void setDeg(int deg) {
+            this.deg = deg;
+        }
     }
 
     public static class Sys {

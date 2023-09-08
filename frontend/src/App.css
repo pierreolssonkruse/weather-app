@@ -52,6 +52,9 @@
   margin-top: 20px;
 }
 
+.weather-icon {
+  margin-bottom: -1rem;
+}
 
 @keyframes App-logo-spin {
   from {
