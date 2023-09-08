@@ -28,6 +28,31 @@
   color: #61dafb;
 }
 
+.app-container {
+  margin-top: 20px;
+}
+
+.app-paper {
+  padding: 20px;
+}
+
+.app-title {
+  margin-bottom: 20px;
+}
+
+.app-input {
+  margin-bottom: 20px;
+}
+
+.app-button {
+  margin-top: 10px;
+}
+
+.weather-info {
+  margin-top: 20px;
+}
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

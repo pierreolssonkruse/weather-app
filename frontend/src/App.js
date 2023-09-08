@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, TextField, Typography, Paper, Container } from '@mui/material';
 import './App.css';
 
 function App() {
@@ -16,22 +17,39 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <input 
-        value={location} 
-        onChange={e => setLocation(e.target.value)} 
-        placeholder="Enter location" 
-      />
-      <button onClick={fetchWeather}>Get Weather</button>
+    <Container className="app-container">
+      <Paper className="app-paper">
+        <Typography variant="h4" gutterBottom className="app-title">
+          Weather App
+        </Typography>
+        <TextField 
+          fullWidth
+          variant="outlined"
+          value={location} 
+          onChange={e => setLocation(e.target.value)} 
+          placeholder="Enter location" 
+          label="Location"
+          className="app-input"
+        />
+        <Button variant="contained" color="primary" onClick={fetchWeather} className="app-button">
+          Get Weather
+        </Button>
 
-      {weather && weather.main && (
-        <div>
-          <h2>{weather.name}</h2>
-          <p>Temperature: {kelvinToCelsius(weather.main.temp).toFixed(2)}°C</p>
-          <p>Conditions: {weather.weather[0].description}</p>
-        </div>
-      )}
-    </div>
+        {weather && weather.main && (
+          <div className="weather-info">
+            <Typography variant="h5">
+              {weather.name}
+            </Typography>
+            <Typography variant="body1">
+              Temperature: {kelvinToCelsius(weather.main.temp).toFixed(1)}°C
+            </Typography>
+            <Typography variant="body1">
+              Conditions: {weather.weather[0].description}
+            </Typography>
+          </div>
+        )}
+      </Paper>
+    </Container>
   );
 }
 
