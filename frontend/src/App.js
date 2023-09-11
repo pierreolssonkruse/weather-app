@@ -5,6 +5,7 @@ import './App.css';
 function App() {
   const [location, setLocation] = useState('');
   const [weather, setWeather] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const textInputRef = useRef(null);
 
   const handleKeyDown = (e) => {
@@ -21,10 +22,18 @@ function App() {
     return degree;
   }
 
-  const fetchWeather = () => {
-    fetch(`/api/weather/${location}`)
-      .then(response => response.json())
-      .then(data => setWeather(data));
+  const fetchWeather = async () => {
+    try {
+      const response = await fetch(`/api/weather/${location}`);
+      if (!response.ok) {
+        throw new Error('Location not found or other error occurred');
+      }
+      const data = await response.json();
+      setWeather(data);
+      setErrorMessage(null);
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
   };
 
   return (
@@ -49,6 +58,11 @@ function App() {
         <Button variant="contained" color="primary" onClick={fetchWeather} className="app-button">
           Get Weather
         </Button>
+        {errorMessage && (
+          <Typography variant="body1" color="error">
+            {errorMessage}
+          </Typography>
+        )}
         {weather && weather.main && (
           <div className="weather-info">
             <Typography variant="h5">
