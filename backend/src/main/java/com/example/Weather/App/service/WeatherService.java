@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class WeatherService {
-    private final String API_KEY = "";
+    private final String API_KEY = "32daf3975f77a7be36aaac1386d18046";
     private final String BASE_URL = "http://api.openweathermap.org/data/2.5/weather?q=";
 
     public Mono<WeatherResponse> getWeather(String location) {

@@ -22,6 +22,16 @@ function App() {
     return degree;
   }
 
+  const dateTimeToString = (unixTimestamp, type = 'both') => {
+    const date = new Date(unixTimestamp * 1000);
+    const formatOptions = {
+      date: { month: 'short', day: 'numeric' },
+      time: { hour: 'numeric', minute: 'numeric' },
+      both: { month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' }
+    };
+    return date.toLocaleString('en-GB', formatOptions[type]);
+  }
+
   const fetchWeather = async () => {
     try {
       const response = await fetch(`/api/weather/${location}`);
@@ -65,6 +75,15 @@ function App() {
         )}
         {weather && weather.main && (
           <div className="weather-info">
+            <Typography variant="body1">
+              Date: {dateTimeToString(weather.dt)}
+            </Typography>
+            <Typography variant="body1">
+              Sunrise: {dateTimeToString(weather.sys.sunrise, 'time')}
+            </Typography>
+            <Typography variant="body1">
+              Sunset: {dateTimeToString(weather.sys.sunset, 'time')}
+            </Typography>
             <Typography variant="h5">
               {weather.name + ", " + weather.sys.country}
               {weather.weather[0].icon && (
@@ -79,19 +98,27 @@ function App() {
               Temperature: {kelvinToCelsius(weather.main.temp).toFixed(1)}°C
             </Typography>
             <Typography variant="body1">
+              Feels Like: {kelvinToCelsius(weather.main.feels_like).toFixed(1)}°C
+            </Typography>
+            <Typography variant="body1">
+              Max Temperature: {kelvinToCelsius(weather.main.temp_max).toFixed(1)}°C
+            </Typography>
+            <Typography variant="body1">
+              Min Temperature: {kelvinToCelsius(weather.main.temp_min).toFixed(1)}°C
+            </Typography>
+            <Typography variant="body1">
               Pressure: {weather.main.pressure} hPa
             </Typography>
             <Typography variant="body1">
               Humidity: {weather.main.humidity}%
             </Typography>
             <Typography variant="body1">
-              Wind Speed: {weather.wind.speed} m/s
+              Visibility: {weather.visibility / 1000} km
             </Typography>
             <Typography variant="body1">
-              Wind Direction:
-              <span className="wind-arrow" style={{ transform: `rotate(${degreeToRotation(weather.wind.deg)}deg)` }}>
+              Wind: <span className="wind-arrow" style={{ transform: `rotate(${degreeToRotation(weather.wind.deg)}deg)` }}>
                 →
-              </span>
+              </span> {weather.wind.speed} m/s
             </Typography>
             <Typography variant="body1">
               Conditions: {weather.weather[0].description}

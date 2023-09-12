@@ -12,8 +12,14 @@ public class WeatherResponse {
     @JsonProperty("main")
     private Main main;
 
+    @JsonProperty("visibility")
+    private int visibility;
+
     @JsonProperty("wind")
     private Wind wind;
+
+    @JsonProperty("dt")
+    private int dt;
 
     @JsonProperty("sys")
     private Sys sys;
@@ -37,12 +43,28 @@ public class WeatherResponse {
         this.main = main;
     }
 
+    public int getVisibility() {
+        return visibility;
+    }
+
+    public void setVisibility(int visibility) {
+        this.visibility = visibility;
+    }
+
     public Wind getWind() {
         return wind;
     }
 
     public void setWind(Wind wind) {
         this.wind = wind;
+    }
+
+    public int getDt() {
+        return dt;
+    }
+
+    public void setDt(int dt) {
+        this.dt = dt;
     }
 
     public Sys getSys() {
@@ -72,6 +94,39 @@ public class WeatherResponse {
 
         public void setTemp(double temp) {
             this.temp = temp;
+        }
+
+        @JsonProperty("feels_like")
+        private double feelsLike;
+
+        public double getFeelsLike() {
+            return feelsLike;
+        }
+
+        public void setFeelsLike(double feelsLike) {
+            this.feelsLike = feelsLike;
+        }
+
+        @JsonProperty("temp_min")
+        private double tempMin;
+
+        public double getTempMin() {
+            return tempMin;
+        }
+
+        public void setTempMin(double tempMin) {
+            this.tempMin = tempMin;
+        }
+
+        @JsonProperty("temp_max")
+        private double tempMax;
+
+        public double getTempMax() {
+            return tempMax;
+        }
+
+        public void setTempMax(double tempMax) {
+            this.tempMax = tempMax;
         }
 
         @JsonProperty("pressure")
@@ -133,6 +188,28 @@ public class WeatherResponse {
 
         public void setCounty(String country) {
             this.country = country;
+        }
+
+        @JsonProperty("sunrise")
+        private int sunrise;
+
+        public int getSunrise() {
+            return sunrise;
+        }
+
+        public void setSunrise(int sunrise) {
+            this.sunrise = sunrise;
+        }
+
+        @JsonProperty("sunset")
+        private int sunset;
+
+        public int getSunset() {
+            return sunset;
+        }
+        
+        public void setSunset(int sunset) {
+            this.sunset = sunset;
         }
     }
 
